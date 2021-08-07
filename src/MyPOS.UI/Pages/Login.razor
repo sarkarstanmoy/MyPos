@@ -1,0 +1,27 @@
+﻿@page "/login"
+@inject MyPOS.UI.PageViewModels.LoginViewModel loginViewModel
+
+<EditForm Model="@loginModel" OnSubmit="()=>loginViewModel.Submit(loginModel)" class="form-group col-lg-4 col-md-4 col-sm-4 container justify-content-center">
+    <DataAnnotationsValidator />
+    <div class="col-sm-8 text-danger">
+        <ValidationSummary />
+    </div>
+    <div class="form-group">
+        <label>
+            UserName:
+            <InputText id="userName" @bind-Value="loginModel.UserName" class="form-control" />
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            Password:
+            <InputText @bind-Value="loginModel.Password" class="form-control" />
+        </label>
+    </div>
+    <div class="text-left">
+        <button class="btn btn-primary">Submit</button>
+    </div>
+</EditForm>
+@code{
+    private MyPOS.Core.Models.LoginModel loginModel = new Core.Models.LoginModel();
+}

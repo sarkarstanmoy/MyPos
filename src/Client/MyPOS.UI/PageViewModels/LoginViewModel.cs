@@ -1,30 +1,30 @@
-﻿using Microsoft.AspNetCore.Components.Forms;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Logging;
 using MyPOS.Core.Models;
-using System.Threading.Tasks;
 
 namespace MyPOS.UI.PageViewModels
 {
-    public class LoginViewModel
+    public class LoginViewModel : ComponentBase
     {
         private EditContext editContext;
+
+        [Inject]
         public ILogger<LoginViewModel> _logger { get; set; }
 
-        public LoginViewModel(ILogger<LoginViewModel> logger)
-        {
-            _logger = logger;
-        }
+        [Inject]
+        public NavigationManager navigationManager { get; set; }
 
         public void Submit(LoginModel loginModel)
         {
             editContext = new EditContext(loginModel);
             if (editContext.Validate())
             {
-                _logger.LogInformation("Form is valid");
+                navigationManager.NavigateTo("fetchdata");
             }
             else
             {
-                _logger.LogError("Form is invalid");
+                _logger.LogError("Invalid form...");
             }
         }
     }

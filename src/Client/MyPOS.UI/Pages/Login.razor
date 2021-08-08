@@ -1,27 +1,38 @@
 ﻿@page "/login"
-@inject MyPOS.UI.PageViewModels.LoginViewModel loginViewModel
+@using  MyPOS.UI.PageViewModels
+@inherits LoginViewModel
 
-<EditForm Model="@loginModel" OnSubmit="()=>loginViewModel.Submit(loginModel)" class="form-group col-lg-4 col-md-4 col-sm-4 container justify-content-center">
-    <DataAnnotationsValidator />
-    <div class="col-sm-8 text-danger">
-        <ValidationSummary />
+<div class="container-fluid">
+    <div class="row card justify-content-center back" style="width: 18rem;">
+        <img src="" class="card-img-top" alt="Need Image">
+        <div class="card-body">
+            <h5 class="card-title text-center display-5">Login</h5>
+
+            <EditForm Model="@loginModel" OnSubmit="()=>Submit(loginModel)">
+                <DataAnnotationsValidator />
+                <div class="row">
+                    <ValidationSummary />
+                </div>
+                <div class="row">
+                    <i class="material-icons md-36">account_circle</i>
+                    <InputText id="userName" placeholder="Enter Username" @bind-Value="loginModel.UserName" class="col-9 form-control" />
+                </div>
+                <div class="row mt-4 mb-4">
+                    <i class="material-icons md-36">lock</i>
+                    <InputText type="password" placeholder="Enter Password" @bind-Value="loginModel.Password" class="col-9 form-control" />
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        <button class="btn btn-primary">Submit</button>
+                    </div>
+                    <div class="col-5">
+                        <button class="btn btn-secondary">Register</button>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
     </div>
-    <div class="form-group">
-        <label>
-            UserName:
-            <InputText id="userName" @bind-Value="loginModel.UserName" class="form-control" />
-        </label>
-    </div>
-    <div class="form-group">
-        <label>
-            Password:
-            <InputText @bind-Value="loginModel.Password" class="form-control" />
-        </label>
-    </div>
-    <div class="text-left">
-        <button class="btn btn-primary">Submit</button>
-    </div>
-</EditForm>
+</div>
 @code{
     private MyPOS.Core.Models.LoginModel loginModel = new Core.Models.LoginModel();
 }

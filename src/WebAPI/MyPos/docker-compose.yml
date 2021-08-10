@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: Identity.API/Dockerfile
+    ports:
+      - "57915:80"
   database:
       image: mysql
       environment:

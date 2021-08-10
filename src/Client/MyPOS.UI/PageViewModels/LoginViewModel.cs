@@ -8,6 +8,8 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text;
 using System.Threading.Tasks;
+using MyPOS.Core.Extensions;
+using MyPOS.UI.BaseRemoteService.Http;
 
 namespace MyPOS.UI.PageViewModels
 {
@@ -22,17 +24,14 @@ namespace MyPOS.UI.PageViewModels
         public NavigationManager navigationManager { get; set; }
 
         [Inject]
-        public IHttpClientFactory clientFatory { get; set; }
+        public IUserRepository userRepository { get; set; }
 
         public async Task SubmitAsync(LoginModel loginModel)
         {
-            var client = clientFatory.CreateClient("LoginAPI");
             editContext = new EditContext(loginModel);
             if (editContext.Validate())
             {
-                client.DefaultRequestHeaders.Add("Access-Control-Allow-Origin", "*");
-                var response = await client.PostAsJsonAsync("login", loginModel);
-                var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponse>();
+                var loginResponse = await userRepository.TryLoginAsync(loginModel);
                 if (loginResponse.IsFailure)
                 {
                     logger.LogError("Login failed");

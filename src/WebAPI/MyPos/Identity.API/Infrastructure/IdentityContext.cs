@@ -17,6 +17,8 @@ namespace Identity.API.Infrastructure
             {
                 entity.ToTable("credentials");
                 entity.HasKey(e => e.UserName);
+                entity.Property(e => e.Password).IsRequired();
+                entity.Property(e => e.LastLogin).IsRequired();
             });
         }
     }

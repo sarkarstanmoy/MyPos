@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  identity.api:
+    image: ${DOCKER_REGISTRY-}identityapi
+    build:
+      context: .
+      dockerfile: Identity.API/Dockerfile
+  database:
+      image: mysql
+      environment:
+        - "MYSQL_DATABASE=account"
+        - "MYSQL_USER=admin"
+        - "MYSQL_PASSWORD=admin"
+        - "MYSQL_ROOT_PASSWORD=root123"
+      ports:
+          - "33061:3306"  

@@ -8,7 +8,7 @@ namespace MyPOS.Core.Models
         public string UserName { get; set; }
 
         [Required]
-        [MinLength(8, ErrorMessage = "Password need to be minimum 8 characters")]
+        [MinLength(4, ErrorMessage = "Password need to be minimum 4 characters")]
         public string Password { get; set; }
     }
 }

@@ -8,7 +8,7 @@
         <div class="card-body">
             <h5 class="card-title text-center display-5">Login</h5>
 
-            <EditForm Model="@loginModel" OnSubmit="()=>Submit(loginModel)">
+            <EditForm Model="@loginModel" OnSubmit="()=> SubmitAsync(loginModel)">
                 <DataAnnotationsValidator />
                 <div class="row">
                     <ValidationSummary />

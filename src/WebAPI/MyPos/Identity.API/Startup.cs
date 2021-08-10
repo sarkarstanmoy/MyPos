@@ -2,6 +2,7 @@ using Identity.API.Infrastructure;
 using Identity.API.Infrastructure.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -44,11 +45,20 @@ namespace Identity.API
             services.AddScoped<IIdentityRepository, IdentityRepository>();
 
             services.AddMediatR(typeof(Startup).Assembly);
+            services.AddCors(policy =>
+            {
+                policy.AddPolicy("CorsPolicy", opt => opt
+                    .AllowAnyOrigin()
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors("CorsPolicy");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

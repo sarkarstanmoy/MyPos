@@ -22,7 +22,7 @@ namespace Identity.API.Handlers
         public async Task<GetUserResponse> Handle(GetUserQuery request, CancellationToken cancellationToken)
         {
             var record = await _identityRepository.GetUserAsync(request.User.UserName);
-            if (record.Password == request.User.Password)
+            if (record?.Password == request?.User.Password)
                 return new GetUserResponse(isFailure: false, ErrorMessage: string.Empty);
             else
                 return new GetUserResponse(isFailure: true, ErrorMessage: "Login Failure");

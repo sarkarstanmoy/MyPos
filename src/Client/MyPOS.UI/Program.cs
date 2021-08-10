@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using MyPOS.UI.PageViewModels;
-using System;
-using System.Net.Http;
 using System.Threading.Tasks;
+using System.Net.Http;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace MyPOS.UI
 {
@@ -14,8 +12,8 @@ namespace MyPOS.UI
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
-
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddHttpClient("LoginAPI",
+                                            client => client.BaseAddress = new Uri("http://localhost:57915/api/v1/Account/"));
             await builder.Build().RunAsync();
         }
     }

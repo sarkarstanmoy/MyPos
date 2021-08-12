@@ -1,19 +1,31 @@
 version: '3.4'
 
 services:
+  catalog.api:
+    image: ${DOCKER_REGISTRY-}catalogapi
+    build:
+      context: .
+      dockerfile: Services/Catalog/Catalog.API/Dockerfile
+    depends_on:
+          -  mypos-mysql
   identity.api:
     image: ${DOCKER_REGISTRY-}identityapi
     build:
       context: .
-      dockerfile: Identity.API/Dockerfile
-    ports:
-      - "57915:80"
-  database:
-      image: mysql
+      dockerfile: Services/Identity/Dockerfile
+    depends_on:
+          -  mypos-mysql
+  mypos-mysql:
+      image: mysql:5.7.35
       environment:
-        - "MYSQL_DATABASE=account"
-        - "MYSQL_USER=admin"
-        - "MYSQL_PASSWORD=admin"
-        - "MYSQL_ROOT_PASSWORD=root123"
+        MYSQL_DATABASE: account
+        MYSQL_ROOT_PASSWORD: root123
+      volumes:
+        - ./mysql-data:/var/lib/mysql
+        - ./mysql-scripts/init.sql:/docker-entrypoint-initdb.d/1.sql
+      restart: always
       ports:
-          - "33061:3306"  
+        - "33061:3306"
+volumes:
+  mysql-data:
+  

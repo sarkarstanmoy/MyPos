@@ -1,8 +1,15 @@
 version: '3.4'
 
 services:
+  catalog.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+
   identity.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "80"
+

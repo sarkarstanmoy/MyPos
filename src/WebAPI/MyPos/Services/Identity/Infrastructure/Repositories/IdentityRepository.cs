@@ -1,4 +1,5 @@
 ﻿using Identity.API.Model;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Identity.API.Infrastructure.Repositories
 
         public IdentityRepository(IdentityContext identityContext)
         {
-            _identityContext = identityContext;
+            _identityContext = identityContext ?? throw new ArgumentNullException(nameof(identityContext));
         }
 
         public async Task<Credentials> GetUserAsync(string userName)

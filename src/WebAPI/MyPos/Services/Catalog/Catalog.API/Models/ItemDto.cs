@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.API.Models
 {
-    public class CatalogDto
+    public class ItemDto
     {
-        public string CatalogType { get; set; }
-        public ICollection<Item> Items { get; set; }
     }
 }

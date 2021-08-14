@@ -1,4 +1,4 @@
-﻿using Catalog.API.Infrastructure.Repository;
+﻿using Catalog.API.Infrastructure.Repository.Interfaces;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,7 +17,7 @@ namespace Catalog.API.Handler
 
         public async Task<GetCatalogResponse> Handle(GetCatalogQuery request, CancellationToken cancellationToken)
         {
-            var record = await _getCatalogRepository.GetCatalogAsync(request.id);
+            var record = await _getCatalogRepository.GetCatalogAsync(x => x.CatalogId == request.id);
 
             if (record == null)
                 return new GetCatalogResponse(true, null);

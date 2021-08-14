@@ -1,19 +1,15 @@
 using Catalog.API.Infrastructure;
 using Catalog.API.Infrastructure.Repository;
+using Catalog.API.Infrastructure.Repository.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Catalog.API
 {
@@ -42,6 +38,7 @@ namespace Catalog.API
                    .EnableDetailedErrors());
 
             services.AddScoped<IGetCatalogRepository, GetCatalogRepository>();
+            //services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
 
             services.AddMediatR(typeof(Startup).Assembly);
             services.AddCors(policy =>

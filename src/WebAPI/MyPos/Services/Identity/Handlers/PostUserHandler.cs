@@ -1,13 +1,8 @@
 ﻿using Identity.API.Infrastructure.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using static Identity.API.Command.PostCommand;
-using static Identity.API.Queries.GetValuesQuery;
 
 namespace Identity.API.Handlers
 {

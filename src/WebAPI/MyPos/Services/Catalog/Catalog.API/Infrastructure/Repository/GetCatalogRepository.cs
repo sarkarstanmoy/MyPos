@@ -1,27 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Catalog.API.Infrastructure.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Catalog.API.Infrastructure.Repository
 {
-    public class GetCatalogRepository : IGetCatalogRepository
+    public class GetCatalogRepository : RepositoryBase<Models.Catalog>, IGetCatalogRepository
     {
-        private readonly CatalogDbContext _catalogDbContext;
-
-        public GetCatalogRepository(CatalogDbContext catalogDbContext)
+        public GetCatalogRepository(CatalogDbContext catalogDbContext) : base(catalogDbContext)
         {
-            _catalogDbContext = catalogDbContext ?? throw new ArgumentNullException(nameof(catalogDbContext));
         }
 
-        public async ValueTask<Catalog.API.Models.Catalog> GetCatalogAsync(int catalogId)
+        public async ValueTask<Models.Catalog> GetCatalogAsync(Expression<Func<Models.Catalog, bool>> expression, int page, int pageSize)
         {
-            return _catalogDbContext.catalogDbSet.AsNoTracking().Include(x => x.Items).FirstOrDefault(x => x.CatalogId == catalogId);
+            return await FindByCondition(expression, page, pageSize).Include(x => x.Items).FirstOrDefaultAsync();
         }
-    }
-
-    public interface IGetCatalogRepository
-    {
-        ValueTask<Catalog.API.Models.Catalog> GetCatalogAsync(int catalogId);
     }
 }

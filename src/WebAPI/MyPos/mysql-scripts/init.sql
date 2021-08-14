@@ -15,8 +15,7 @@ use catalogs;
 CREATE TABLE catalog(
 	CatalogId int NOT NULL,
     CatalogType varchar(255) NOT NULL,
-    PRIMARY KEY (CatalogId),
-    FOREIGN KEY (CatalogId) REFERENCES item(CatalogId)
+    PRIMARY KEY (CatalogId)   
 );
 
 INSERT INTO catalogs.catalog VALUES('1','GENERAL');
@@ -35,7 +34,10 @@ CREATE TABLE item(
     Tax varchar(25) NOT NULL ,
     CouponRate decimal ,
     CardRate decimal ,
-    PRIMARY KEY (ItemId)
+    PRIMARY KEY (ItemId),
+    INDEX item_catalog_id (CatalogId),
+	FOREIGN KEY (CatalogId) REFERENCES catalog(CatalogId)
+    ON DELETE CASCADE
 );
 
 INSERT INTO catalogs.item VALUES('1','1',"SOAP","100017","1",NULL,0,NULL,10.0,5.0,"10%",NULL,NULL);

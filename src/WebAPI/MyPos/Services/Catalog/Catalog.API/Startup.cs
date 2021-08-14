@@ -38,7 +38,6 @@ namespace Catalog.API
                    .EnableDetailedErrors());
 
             services.AddScoped<IGetCatalogRepository, GetCatalogRepository>();
-            //services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
 
             services.AddMediatR(typeof(Startup).Assembly);
             services.AddCors(policy =>

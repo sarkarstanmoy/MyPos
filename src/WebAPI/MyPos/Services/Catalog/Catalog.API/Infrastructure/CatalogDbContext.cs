@@ -18,7 +18,7 @@ namespace Catalog.API.Infrastructure
             {
                 entity.ToTable("Catalog");
                 entity.HasKey(e => e.CatalogId);
-                entity.HasMany(i => i.Items).WithOne();
+                entity.HasMany(e => e.Items).WithOne();
             });
 
             modelBuilder.Entity<Models.Item>(entity =>

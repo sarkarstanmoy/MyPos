@@ -17,10 +17,10 @@ namespace Catalog.API.Controllers
         }
 
         [HttpGet]
-        [Route("catalog/{id}")]
-        public async Task<IActionResult> GetCatalog(int id)
+        [Route("catalog/{catalogType}")]
+        public async Task<IActionResult> GetCatalog(string catalogType)
         {
-            return Ok(await _mediator.Send(new GetCatalogQuery(id)));
+            return Ok(await _mediator.Send(new GetCatalogQuery(catalogType)));
         }
     }
 }

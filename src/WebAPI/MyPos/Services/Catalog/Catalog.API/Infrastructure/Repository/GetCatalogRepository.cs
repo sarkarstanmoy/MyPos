@@ -12,9 +12,9 @@ namespace Catalog.API.Infrastructure.Repository
         {
         }
 
-        public async ValueTask<Models.Catalog> GetCatalogAsync(Expression<Func<Models.Catalog, bool>> expression, int page, int pageSize)
+        public async ValueTask<Models.Catalog> GetCatalogAsync(Expression<Func<Models.Catalog, bool>> expression)
         {
-            return await FindByCondition(expression, page, pageSize).Include(i => i.Items).FirstOrDefaultAsync();
+            return await FindByCondition(expression).Include(i => i.Items).FirstOrDefaultAsync();
         }
     }
 }

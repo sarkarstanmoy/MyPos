@@ -5,7 +5,7 @@ namespace Catalog.API.Query
 {
     public class GetValueQuery
     {
-        public record GetCatalogQuery(int id) : IRequest<GetCatalogResponse>;
+        public record GetCatalogQuery(string catalogType) : IRequest<GetCatalogResponse>;
         public record GetCatalogResponse(bool isFailure, CatalogDto CatalogDto);
     }
 }

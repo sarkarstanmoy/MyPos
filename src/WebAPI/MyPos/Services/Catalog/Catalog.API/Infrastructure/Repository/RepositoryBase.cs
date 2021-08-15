@@ -30,9 +30,19 @@ namespace Catalog.API.Infrastructure.Repository
             return this.CatalogDbContext.Set<T>().AsNoTracking().Skip((page - 1) * pageSize).Take(pageSize);
         }
 
+        public IQueryable<T> FindAll()
+        {
+            return this.CatalogDbContext.Set<T>().AsNoTracking();
+        }
+
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, int page, int pageSize)
         {
             return this.CatalogDbContext.Set<T>().AsNoTracking().Where(expression).Skip((page - 1) * pageSize).Take(pageSize);
+        }
+
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
+        {
+            return this.CatalogDbContext.Set<T>().AsNoTracking().Where(expression);
         }
 
         public void Update(T entity)

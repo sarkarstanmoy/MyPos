@@ -6,6 +6,6 @@ namespace Catalog.API.Infrastructure.Repository.Interfaces
 {
     public interface IGetCatalogRepository
     {
-        ValueTask<Models.Catalog> GetCatalogAsync(Expression<Func<Models.Catalog, bool>> expression, int page = 1, int pageSize = 10);
+        ValueTask<Models.Catalog> GetCatalogAsync(Expression<Func<Models.Catalog, bool>> expression);
     }
 }

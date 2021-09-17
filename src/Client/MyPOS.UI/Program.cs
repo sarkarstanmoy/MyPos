@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using System.Threading.Tasks;
-using System.Net.Http;
 using Microsoft.Extensions.DependencyInjection;
-using System;
+using MudBlazor.Services;
 using MyPOS.UI.BaseRemoteService.Http;
+using System;
+using System.Threading.Tasks;
 
 namespace MyPOS.UI
 {
@@ -16,6 +16,7 @@ namespace MyPOS.UI
             builder.Services.AddHttpClient("LoginAPI",
                                             client => client.BaseAddress = new Uri("http://localhost:57915/api/v1/Account/"));
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddMudServices();
 
             await builder.Build().RunAsync();
         }
